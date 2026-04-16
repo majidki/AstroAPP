@@ -1,0 +1,57 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import { products } from "../../data/products";
+
+const categories = ["all", ...Array.from(new Set(products.map((p) => p.category)))];
+---
+
+<Layout title="Shop — Astro Shop" description="Browse the full Astro Shop catalog.">
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <header class="mb-8">
+      <h1 class="text-3xl font-semibold">Shop</h1>
+      <p class="mt-2 text-neutral-600">{products.length} products</p>
+    </header>
+
+    <div
+      id="category-filters"
+      class="flex flex-wrap gap-2 mb-8"
+    >
+      {categories.map((c) => (
+        <button
+          type="button"
+          data-category={c}
+          class="category-btn rounded-full border border-neutral-300 bg-white px-3 py-1 text-sm capitalize hover:border-indigo-400 data-[active=true]:bg-indigo-600 data-[active=true]:text-white data-[active=true]:border-indigo-600"
+          data-active={c === "all" ? "true" : "false"}
+        >{c}</button>
+      ))}
+    </div>
+
+    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {products.map((product) => (
+        <div class="product-item" data-category={product.category}>
+          <ProductCard product={product} />
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".category-btn");
+  const items = document.querySelectorAll<HTMLElement>(".product-item");
+
+  function filter(category: string) {
+    items.forEach((el) => {
+      const show = category === "all" || el.dataset.category === category;
+      el.style.display = show ? "" : "none";
+    });
+    buttons.forEach((b) => {
+      b.dataset.active = b.dataset.category === category ? "true" : "false";
+    });
+  }
+
+  buttons.forEach((b) =>
+    b.addEventListener("click", () => filter(b.dataset.category ?? "all")),
+  );
+</script>

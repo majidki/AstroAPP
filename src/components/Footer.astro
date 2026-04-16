@@ -1,0 +1,14 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-neutral-200 bg-white">
+  <div class="max-w-6xl mx-auto px-4 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-neutral-600">
+    <p>&copy; {year} Astro Shop. Demo storefront.</p>
+    <div class="flex gap-6">
+      <a href="/products" class="hover:text-indigo-600">Shop</a>
+      <a href="/cart" class="hover:text-indigo-600">Cart</a>
+      <a href="https://astro.build" target="_blank" rel="noreferrer" class="hover:text-indigo-600">Built with Astro</a>
+    </div>
+  </div>
+</footer>
