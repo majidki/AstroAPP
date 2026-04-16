@@ -1,9 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import ProductCard from "../../components/ProductCard.astro";
-import { products } from "../../data/products";
 
-const categories = ["all", ...Array.from(new Set(products.map((p) => p.category)))];
+const products = await getCollection("products");
+const categories = ["all", ...Array.from(new Set(products.map((p) => p.data.category)))];
 ---
 
 <Layout title="Shop — Astro Shop" description="Browse the full Astro Shop catalog.">
@@ -29,7 +30,7 @@ const categories = ["all", ...Array.from(new Set(products.map((p) => p.category)
 
     <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {products.map((product) => (
-        <div class="product-item" data-category={product.category}>
+        <div class="product-item" data-category={product.data.category}>
           <ProductCard product={product} />
         </div>
       ))}

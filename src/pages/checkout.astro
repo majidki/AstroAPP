@@ -67,7 +67,7 @@ import Layout from "../layouts/Layout.astro";
 
 <script>
   import { readCart, cartTotal, clearCart } from "../scripts/cart";
-  import { formatPrice } from "../data/products";
+  import { formatPrice } from "../utils/format";
 
   const itemsEl = document.getElementById("summary-items")!;
   const totalEl = document.getElementById("summary-total")!;

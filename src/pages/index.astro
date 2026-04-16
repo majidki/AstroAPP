@@ -1,8 +1,9 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.astro";
-import { products } from "../data/products";
 
+const products = await getCollection("products");
 const featured = products.slice(0, 3);
 ---
 

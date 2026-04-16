@@ -39,7 +39,7 @@ import Layout from "../layouts/Layout.astro";
 
 <script>
   import { readCart, updateQty, removeFromCart, clearCart, cartTotal } from "../scripts/cart";
-  import { formatPrice } from "../data/products";
+  import { formatPrice } from "../utils/format";
 
   const emptyEl = document.getElementById("cart-empty")!;
   const filledEl = document.getElementById("cart-filled")!;
